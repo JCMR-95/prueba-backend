@@ -1,10 +1,41 @@
-<!-- resources/views/welcome.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Bienvenido a la aplicación JC</h1>
+    <h1 class="text-center mb-4">Backend Test</h1>
+
+    <!-- Filtros -->
+    <form action="{{ route('getDataFilter') }}" method="GET" class="mb-4">
+        @csrf
+        <div class="row">
+            <div class="col-md-3">
+                <label for="statusFilter" class="form-label">Status:</label>
+                <select id="statusFilter" name="statusFilter" class="form-select">
+                    <option value="">All</option>
+                    @foreach($statusOptions as $status)
+                        <option value="{{ $status }}">{{ ucfirst($status) }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="speciesFilter" class="form-label">Species:</label>
+                <select id="speciesFilter" name="speciesFilter" class="form-select">
+                    <option value="">All</option>
+                    @foreach($speciesOptions as $species)
+                        <option value="{{ $species }}">{{ ucfirst($species) }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+            </div>
+        </div>
+    </form>
 
     @if(isset($characters) && count($characters) > 0)
         <div class="row">
@@ -30,7 +61,7 @@
             @endforeach
         </div>
 
-        {{ $characters->links() }} <!-- Agrega esta línea para mostrar la paginación -->
+        {{ $characters->links() }}
     @else
         <div class="alert alert-info" role="alert">
             Details not available.
@@ -49,5 +80,6 @@
     hideNumbers.forEach(element => {
         element.style.display = 'none';
     });
+
 </script>
 @endsection
