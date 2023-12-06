@@ -35,6 +35,12 @@ class RickAndMortyController extends Controller
             foreach ($characters as &$character) {
                 $detailsResponse = $client->request('GET', 'https://rickandmortyapi.com/api/character/' . $character['id']);
                 $characterDetails = json_decode($detailsResponse->getBody(), true);
+
+                // Omitir el detalle "created"
+                if (isset($characterDetails['created'])) {
+                    unset($characterDetails['created']);
+                }
+
                 $character['details'] = $characterDetails;
             }
 
@@ -42,11 +48,11 @@ class RickAndMortyController extends Controller
             if ($request->all() !== []) {
                 if($request->input('statusFilter') != null || $request->input('speciesFilter') != null){
                     $characters = $this->filterCharacters($characters, $request->input('statusFilter'), $request->input('speciesFilter'));
-                    $perPage = count($characters);;
+                    $perPage = count($characters);
                 }
             }
 
-            // Extraer status y species
+            // Extraer status y species que serán utilizados para el filtro
             $statusOptions = array_unique(array_column($characters, 'status'));
             $speciesOptions = array_unique(array_column($characters, 'species'));
 

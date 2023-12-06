@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+                <button type="submit" class="btn btn-primary mt-2">Search</button>
             </div>
         </div>
     </form>
@@ -49,11 +49,11 @@
                             @if(isset($character['details']))
                                 @foreach($character['details'] as $key => $value)
                                     @if (!is_array($value))
-                                        <p class="card-text"><strong>{{ ucfirst($key) }}:</strong> {{ $value }}</p>
+                                        <p class="card-text"><strong>{{ ucfirst($key) }}:</strong> {{ $value ?: '-' }}</p>
                                     @endif
                                 @endforeach
                             @else
-                                <p class="card-text"><strong>Detalles no disponibles</strong></p>
+                                <p class="card-text"><strong>Details not available.</strong></p>
                             @endif
                         </div>
                     </div>
@@ -72,13 +72,13 @@
 
     // Se arreglan algunos estilos de la Paginación
     const hideSign = document.querySelectorAll('.w-5.h-5');
-    const elements = document.querySelectorAll('.text-sm.text-gray-700.leading-5');
+    const pages = document.querySelectorAll('.text-sm.text-gray-700.leading-5');
 
     hideSign.forEach(element => {
         element.style.display = 'none';
     });
 
-    elements.forEach(element => {
+    pages.forEach(element => {
         element.style.paddingTop = '10px';
     });
 
