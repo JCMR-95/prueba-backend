@@ -6,7 +6,7 @@
     <h1 class="text-center mb-4">Backend Test</h1>
 
     <!-- Filtros -->
-    <form action="{{ route('getDataFilter') }}" method="GET" class="mb-4">
+    <form action="{{ route('getData') }}" method="GET" class="mb-4">
         @csrf
         <div class="row">
             <div class="col-md-3">
@@ -70,15 +70,16 @@
 </div>
 <script>
 
+    // Se arreglan algunos estilos de la Paginación
     const hideSign = document.querySelectorAll('.w-5.h-5');
-    const hideNumbers = document.querySelectorAll('.relative.z-0.inline-flex.shadow-sm.rounded-md');
+    const elements = document.querySelectorAll('.text-sm.text-gray-700.leading-5');
 
     hideSign.forEach(element => {
         element.style.display = 'none';
     });
 
-    hideNumbers.forEach(element => {
-        element.style.display = 'none';
+    elements.forEach(element => {
+        element.style.paddingTop = '10px';
     });
 
 </script>
